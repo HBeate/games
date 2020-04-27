@@ -32,7 +32,6 @@ private float increaseDiameter;
         if (this.y > 600) {
             this.y = 0;
             diameter = 0;
-        //    this.diameter = this.diameter +10;
 
         }
     }
