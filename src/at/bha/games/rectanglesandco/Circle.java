@@ -8,7 +8,8 @@ public class Circle implements  Actor {
 private float x;
 private float y;
 private float speed;
-private int diameter;
+private float diameter;
+private float increaseDiameter;
 
     public Circle() {
        Random random = new Random();
@@ -27,7 +28,7 @@ private int diameter;
 
     public void update(int delta) {
         this.y += (float) delta / this.speed;
-        this.diameter ++;
+        this.diameter = this.diameter + 0.1f;
         if (this.y > 600) {
             this.y = 0;
             diameter = 0;
