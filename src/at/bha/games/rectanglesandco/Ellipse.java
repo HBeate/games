@@ -1,5 +1,6 @@
 package at.bha.games.rectanglesandco;
 
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
 public class Ellipse implements Actor {
@@ -18,8 +19,10 @@ public class Ellipse implements Actor {
         graphics.drawOval(this.x, this.y, 50, 10);
     }
 
+
+
     @Override
-    public void update(int delta) {
+    public void update(GameContainer gameContainer, int delta) {
         this.x += (float) delta / this.speed;
         this.y += (float) delta / this.speed;
         if (this.y > 600) {

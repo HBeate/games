@@ -1,10 +1,8 @@
 package at.bha.games.rectanglesandco;
 
 import org.newdawn.slick.*;
-import org.newdawn.slick.tests.AnimationTest;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -23,6 +21,7 @@ Die Circles sollen im laufe des Fluges wachsen - immer größer werden (der Durc
  */
 public class RectanglesAndCo extends BasicGame {
     private List<Actor> actors;
+    private Rocket rocket;
 
     public RectanglesAndCo(String title) {
         super(title);
@@ -31,6 +30,10 @@ public class RectanglesAndCo extends BasicGame {
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
         this.actors = new ArrayList<>();
+
+        Rocket rocket = new Rocket();
+        this.rocket = rocket;
+        this.actors.add(rocket);
 
         Random random = new Random();
         for (int i = 0; i < 10; i++) {
@@ -45,13 +48,14 @@ public class RectanglesAndCo extends BasicGame {
             Ellipse ellipse = new Ellipse(random.nextInt(600), random.nextInt(600));
             this.actors.add(ellipse);
         }
+
     }
 
 
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
         for (Actor actor : this.actors) {
-            actor.update(delta);
+            actor.update(gameContainer, delta);
         }
     }
 
@@ -60,6 +64,16 @@ public class RectanglesAndCo extends BasicGame {
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         for (Actor actor : this.actors) {
             actor.render(graphics);
+
+        }
+    }
+
+    @Override
+    public void keyPressed(int key, char c) {
+        if (key == Input.KEY_SPACE) {
+            Cannonball cannonball = new Cannonball(this.rocket.getX(), this.rocket.getY());
+            this.actors.add(cannonball);
+
         }
     }
 

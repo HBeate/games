@@ -1,5 +1,6 @@
 package at.bha.games.rectanglesandco;
 
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
 import java.util.Random;
@@ -26,7 +27,7 @@ private float increaseDiameter;
 
     }
 
-    public void update(int delta) {
+    public void update(GameContainer gameContainer, int delta) {
         this.y += (float) delta / this.speed;
         this.diameter = this.diameter + 0.1f;
         if (this.y > 600) {
