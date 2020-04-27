@@ -29,6 +29,8 @@ private int diameter;
         this.y += (float) delta / this.speed;
         if (this.y > 600) {
             this.y = 0;
+            this.diameter = this.diameter +10;
+
         }
     }
 }
