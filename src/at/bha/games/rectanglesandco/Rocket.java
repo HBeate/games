@@ -29,7 +29,6 @@ public class Rocket implements Actor {
             this.y--;
         if (gameContainer.getInput().isKeyDown(Input.KEY_DOWN))
             this.y++;
-
     }
 
     public float getX() {
