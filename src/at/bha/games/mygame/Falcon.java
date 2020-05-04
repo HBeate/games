@@ -1,9 +1,7 @@
 package at.bha.games.mygame;
-
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
-
 import java.util.ArrayList;
 import java.util.List;
 

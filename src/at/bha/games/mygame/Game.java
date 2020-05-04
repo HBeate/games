@@ -20,13 +20,15 @@ public class Game extends BasicGame {
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
         background = new Image("myfiles/galaxy_bg.jpg");
-        this.actors = new ArrayList<>();
-        this.fighters = new ArrayList<>();
+        sound = new Sound("myfiles/shotgun.wav");
         Random random = new Random();
         Falcon falcon = new Falcon();
+        this.actors = new ArrayList<>();
+        this.fighters = new ArrayList<>();
+
         this.falcon = falcon;
         this.actors.add(falcon);
-        sound = new Sound("myfiles/shotgun.wav");
+
         for (int i = 0; i <5; i++) {
             Fighter fighter = new Fighter(random.nextInt(720)+20, random.nextInt(600) - 600, 20);
             this.actors.add(fighter);
