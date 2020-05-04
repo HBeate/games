@@ -15,6 +15,7 @@ public class Fighter implements Actor {
     private Shape collisionShape;
     private List<Bullet> bullets;
     private boolean isHit = false;
+    private int counter;
 
 
     public Fighter(float x, float y, float speed) throws SlickException {
@@ -29,29 +30,23 @@ public class Fighter implements Actor {
 
     @Override
     public void render(Graphics graphics) {
-        fighter.draw(this.x, this.y);
-        graphics.setColor(Color.blue);
-        graphics.draw(this.collisionShape);
-        graphics.setColor(Color.black);
+        if (!this.isHit) {
+            fighter.draw(this.x, this.y);
+            graphics.draw(this.collisionShape);
+            graphics.setColor(Color.blue);
+        }
     }
 
     @Override
     public void update(GameContainer gameContainer, int delta) {
 
-//TODO Why does the following for each loop throw an exception???
-
-        for (Bullet bullet : bullets) {
-            if (!this.isHit && this.collisionShape.intersects(bullet.getCollisionShape())) {
-                System.out.println("Collision with Bullet");
-                // counte
-                this.isHit= true;
-            }
-        }
+        isHit();
 
         this.y += (float) delta / this.speed;
         if (this.y > 600) {
             this.y = 0;
         }
+
         this.collisionShape.setCenterX(this.x + 28);
         this.collisionShape.setCenterY(this.y + 28);
 
@@ -64,5 +59,25 @@ public class Fighter implements Actor {
     public void addCollisionPartner(Bullet bullet) {
         this.bullets.add(bullet);
     }
+
+    public void countHits() {
+        this.counter++;
+        System.out.println(this.counter);
+    }
+
+    public boolean isHit() {
+        for (Bullet bullet : bullets) {
+            if (!this.isHit && this.collisionShape.intersects(bullet.getCollisionShape())) {
+                System.out.println("Collision with Bullet");
+//counter
+                countHits();
+                this.isHit = true;
+            }
+
+        }return isHit;
+
+    }
+
 }
+
 

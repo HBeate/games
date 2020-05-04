@@ -12,12 +12,9 @@ public class Game extends BasicGame {
     private ArrayList<Fighter> fighters;
     private Falcon falcon;
 
-
-
     public Game(String title) {
         super(title);
     }
-
 
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
@@ -28,12 +25,11 @@ public class Game extends BasicGame {
         Falcon falcon = new Falcon();
         this.falcon = falcon;
         this.actors.add(falcon);
-        for (int i = 0; i < 30; i++) {
-            Fighter fighter = new Fighter(random.nextInt(800), random.nextInt(600) - 600, 30);
+        for (int i = 0; i < 2; i++) {
+            Fighter fighter = new Fighter(random.nextInt(720)+20, random.nextInt(600) - 600, 20);
             this.actors.add(fighter);
             this.fighters.add(fighter);
             this.falcon.addCollisionPartner(fighter);
-
         }
     }
 
@@ -50,7 +46,6 @@ public class Game extends BasicGame {
         for (Actor actor : this.actors) {
             actor.render(graphics);
         }
-
     }
 
     @Override

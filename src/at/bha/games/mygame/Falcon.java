@@ -39,7 +39,7 @@ public class Falcon implements Actor {
     @Override
     public void update(GameContainer gameContainer, int delta) {
         for (Fighter fighter : fighters) {
-            if (this.collisionShape.intersects(fighter.getCollisionShape())) {
+            if (!fighter.isHit() && this.collisionShape.intersects(fighter.getCollisionShape())) {
                 System.out.println("Collision with Fighter");
             }
         }
@@ -63,7 +63,6 @@ public class Falcon implements Actor {
             if (this.y < 550) {
                 this.y++;
             }
-
         }
         this.collisionShape.setCenterX(this.x + 50);
         this.collisionShape.setCenterY(this.y + 60);
