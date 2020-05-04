@@ -17,30 +17,28 @@ public class Falcon implements Actor {
 
 
     public Falcon() throws SlickException {
-        Image tmp = new Image("testdata/falcon.png");
+        Image tmp = new Image("myfiles/falcon.png");
         this.falcon = tmp.getScaledCopy(100, 120);
         this.x = 300;
         this.y = 400;
         this.collisionShape = new Rectangle(this.x, this.y, 100, 120);
         this.fighters = new ArrayList<Fighter>();
         this.counter = 0;
-
     }
 
     @Override
     public void render(Graphics graphics) {
 
         falcon.draw(this.x, this.y);
-        //nur jetzt
-        graphics.setColor(new Color(50, 250, 50));
-        graphics.draw(this.collisionShape);
+//        graphics.setColor(new Color(50, 250, 50));
+//        graphics.draw(this.collisionShape);
     }
 
     @Override
     public void update(GameContainer gameContainer, int delta) {
         for (Fighter fighter : fighters) {
             if (!fighter.isHit() && this.collisionShape.intersects(fighter.getCollisionShape())) {
-                System.out.println("Collision with Fighter");
+                System.out.println("Collision Falcon with Fighter");
             }
         }
         if (gameContainer.getInput().isKeyDown(Input.KEY_LEFT)) {

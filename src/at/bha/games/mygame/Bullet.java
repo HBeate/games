@@ -20,8 +20,8 @@ public class Bullet implements Actor {
     @Override
     public void render(Graphics graphics) {
         graphics.fillOval(this.x, this.y, 10, 10);
-        graphics.setColor(Color.magenta);
-        graphics.draw(this.collisionShape);
+        graphics.setColor(Color.green);
+//        graphics.draw(this.collisionShape);
     }
 
     @Override
