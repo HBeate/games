@@ -14,23 +14,24 @@ public class Bullet implements Actor {
     public Bullet(float x, float y) {
         this.x = x;
         this.y = y;
-        this.collisionShape = new Circle (this.x, this.y,5);
+        this.collisionShape = new Circle(this.x, this.y, 5);
     }
 
     @Override
     public void render(Graphics graphics) {
-        graphics.fillOval(this.x, this.y, 10, 10);
-        graphics.setColor(Color.green);
-//        graphics.draw(this.collisionShape);
+            graphics.fillOval(this.x, this.y, 10, 10);
+            graphics.setColor(Color.green);
     }
 
     @Override
     public void update(GameContainer gameContainer, int delta) {
-        this.y--;
+           this.y--;
+           this.collisionShape.setCenterX(this.x + 5);
+           this.collisionShape.setCenterY(this.y + 5);
+    }
 
-        this.collisionShape.setCenterX(this.x+5);
-        this.collisionShape.setCenterY(this.y+5);
-
+    public float getY() {
+        return y;
     }
 
     public Shape getCollisionShape() {

@@ -1,9 +1,12 @@
 package at.bha.games.mygame;
+
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Falcon implements Actor {
 
@@ -11,7 +14,10 @@ public class Falcon implements Actor {
     private float x, y;
     private Shape collisionShape;
     private List<Fighter> fighters;
-    private int counter;
+    private boolean isHit = false;
+    private int counterLives;
+    private Font font2;
+    Random random = new Random();
 
 
     public Falcon() throws SlickException {
@@ -21,24 +27,48 @@ public class Falcon implements Actor {
         this.y = 400;
         this.collisionShape = new Rectangle(this.x, this.y, 100, 120);
         this.fighters = new ArrayList<Fighter>();
-        this.counter = 0;
+        this.counterLives = 3;
     }
 
     @Override
     public void render(Graphics graphics) {
-
-        falcon.draw(this.x, this.y);
+        if (!isHit) {
+            falcon.draw(this.x, this.y);
 //        graphics.setColor(new Color(50, 250, 50));
 //        graphics.draw(this.collisionShape);
+        } else {
+            falcon.draw();
+        }
     }
 
     @Override
     public void update(GameContainer gameContainer, int delta) {
+
+        // If the fighter touches the Falcon, it will move to starting position
         for (Fighter fighter : fighters) {
-            if (!fighter.isHit() && this.collisionShape.intersects(fighter.getCollisionShape())) {
-                System.out.println("Collision Falcon with Fighter");
+            if (!fighter.isHit() && this.collisionShape.intersects(fighter.getCollisionShape()) && getCounterLives() > 0) {
+                counterLives--;
+                this.x = 300;
+                this.y = 400;
             }
         }
+
+        //If the Falcon moves back to starting position and a fighter happens to be there
+        for (Fighter fighter : fighters) {
+            if (!fighter.isHit() && this.collisionShape.intersects(fighter.getCollisionShape())) {
+                fighter.setY(random.nextInt(600) - 600);
+            }
+        }
+
+        //If the fighter reaches the bottom of the screen counterLives--
+        for (Fighter fighter : fighters) {
+            if (fighter.getY() > 550 && getCounterLives() > 0) {
+                fighter.setY(random.nextInt(600) - 600);
+                this.y = random.nextInt(600) - 600;
+                counterLives--;
+            }
+        }
+
         if (gameContainer.getInput().isKeyDown(Input.KEY_LEFT)) {
             if (this.x > -30) {
                 this.x--;
@@ -62,6 +92,7 @@ public class Falcon implements Actor {
         }
         this.collisionShape.setCenterX(this.x + 50);
         this.collisionShape.setCenterY(this.y + 60);
+
     }
 
     public float getX() {
@@ -72,7 +103,12 @@ public class Falcon implements Actor {
         return y - 10;
     }
 
+
     public void addCollisionPartner(Fighter fighter) {
         this.fighters.add(fighter);
+    }
+
+    public int getCounterLives() {
+        return counterLives;
     }
 }
