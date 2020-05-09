@@ -1,21 +1,26 @@
 package at.bha.games.mygame;
 
-import at.bha.games.rectanglesandco.RectanglesAndCo;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.AngelCodeFont;
+import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Game extends BasicGame {
     private Image background;
-    private ArrayList<Actor> actors;
+    private ArrayList<IActor> IActors;
     private ArrayList<Fighter> fighters;
     private Falcon falcon;
     private Sound sound;
     private AngelCodeFont font;
     private AngelCodeFont font2;
-    private int counter = 0;
+    private int counter;
+    private Shape shapeExit;
+    private Shape shapePlayAgain;
+    private Random random;
 
     public Game(String title) {
         super(title);
@@ -27,16 +32,19 @@ public class Game extends BasicGame {
         sound = new Sound("myfiles/shotgun.wav");
         Random random = new Random();
         Falcon falcon = new Falcon();
-        this.actors = new ArrayList<>();
+        this.IActors = new ArrayList<>();
         this.fighters = new ArrayList<>();
         this.falcon = falcon;
-        this.actors.add(falcon);
+        this.IActors.add(falcon);
+        this.shapePlayAgain = new Rectangle(350, 304, 126, 30);
+        this.shapeExit = new Rectangle(400, 354, 46, 26);
+        this.counter= 0;
 
         font = new AngelCodeFont("testdata/demo2.fnt", "testdata/demo2_00.tga");
         font2 = new AngelCodeFont("testdata/hiero.fnt", "testdata/hiero.png");
         for (int i = 0; i < 5; i++) {
             Fighter fighter = new Fighter(random.nextInt(720) + 20, random.nextInt(600) - 600, 20);
-            this.actors.add(fighter);
+            this.IActors.add(fighter);
             this.fighters.add(fighter);
             this.falcon.addCollisionPartner(fighter);
         }
@@ -44,10 +52,10 @@ public class Game extends BasicGame {
 
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
-        for (Actor actor : this.actors) {
-            actor.update(gameContainer, delta);
+        for (IActor IActor : this.IActors) {
+            IActor.update(gameContainer, delta);
 
-            if (actor instanceof Fighter) {
+            if (IActor instanceof Fighter) {
                 int speed = 20;
 
                 if (counter >= 10 && counter < 30) {
@@ -55,7 +63,7 @@ public class Game extends BasicGame {
                 } else if (counter >= 30) {
                     speed = 10;
                 }
-                ((Fighter) actor).setSpeed(speed);
+                ((Fighter) IActor).setSpeed(speed);
             }
         }
     }
@@ -64,19 +72,46 @@ public class Game extends BasicGame {
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         background.draw(0, 0, 800, 600);
         if (falcon.getCounterLives() > 0) {
-        counter = 0;
-            for (Actor actor : this.actors) {
-                if (actor instanceof Fighter) {
-                    Fighter fighter = (Fighter) actor;
+            counter = 0;
+            for (IActor IActor : this.IActors) {
+                if (IActor instanceof Fighter) {
+                    Fighter fighter = (Fighter) IActor;
                     counter += fighter.getHitCount();
                 }
-                actor.render(graphics);
+                IActor.render(graphics);
             }
-        }else{
+        } else {
             font2.drawString(250, 200, "GAME OVER ! ! ! ");
+            font.drawString(350, 300, "Play again", Color.yellow);
+            font.drawString(400, 350, "Exit", Color.yellow);
+            graphics.draw(this.shapeExit);
+            graphics.draw(this.shapePlayAgain);
+
         }
         font.drawString(10, 520, "Points:  " + counter, Color.yellow);
         font.drawString(10, 560, "Lives:  " + falcon.getCounterLives(), Color.yellow);
+
+    }
+
+    @Override
+    public void mousePressed(int button, int x, int y) {
+        if (button == Input.MOUSE_LEFT_BUTTON) {
+            if (falcon.getCounterLives() == 0 && x > 400 && x < 446 && y > 354 && y < 380) {
+                System.out.println("Exit");
+                System.exit(0);
+            } else if (falcon.getCounterLives() == 0 && x > 350 && x < 476 && y > 304 && y < 334)
+                System.out.println("Play again");
+            falcon.setX(300);
+            falcon.setY(400);
+            falcon.setCounterLives(3);
+            counter = 0;
+            //TODO reset the game to PlayAgain
+//            for (int i = 0; i <5 ; i++) {
+//                fighters.get(i).setY(random.nextInt(600) - 600);
+//                fighters.get(i).setX(random.nextInt(720) + 20);
+//            }
+
+        }
     }
 
     @Override
@@ -87,7 +122,7 @@ public class Game extends BasicGame {
             for (Fighter fighter : this.fighters) {
                 fighter.addCollisionPartner(bullet);
             }
-            this.actors.add(bullet);
+            this.IActors.add(bullet);
             sound.play();
         }
     }

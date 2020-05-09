@@ -6,7 +6,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
 
-public class Bullet implements Actor {
+public class Bullet implements IActor {
     private float x, y;
     private float speed;
     private Shape collisionShape;

@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Falcon implements Actor {
+public class Falcon implements IActor {
 
     private Image falcon;
     private float x, y;
     private Shape collisionShape;
     private List<Fighter> fighters;
-    private boolean isHit = false;
+    private boolean isHit;
     private int counterLives;
     private Font font2;
     Random random = new Random();
@@ -28,6 +28,7 @@ public class Falcon implements Actor {
         this.collisionShape = new Rectangle(this.x, this.y, 100, 120);
         this.fighters = new ArrayList<Fighter>();
         this.counterLives = 3;
+        this.isHit = false;
     }
 
     @Override
@@ -110,5 +111,21 @@ public class Falcon implements Actor {
 
     public int getCounterLives() {
         return counterLives;
+    }
+
+    public void setCounterLives(int counterLives) {
+        this.counterLives = counterLives;
+    }
+//
+//    public void setHit(boolean hit) {
+//        isHit = hit;
+//    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public void setY(float y) {
+        this.y = y;
     }
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Fighter implements Actor {
+public class Fighter implements IActor {
     private Image fighter;
     private Image explosion;
     private float x, y;
@@ -71,7 +71,9 @@ public class Fighter implements Actor {
 
         for (Bullet bullet : bullets) {
             if (!this.isHit && this.collisionShape.intersects(bullet.getCollisionShape()) && bullet.getY() > 5) {
-
+//TODO try to show an image of an explosion, whenever a fighter is hit
+//                explosion.draw(this.x,this.y);
+//                explosion.drawFlash(this.x,this.y);
 
                 counter++;
                 this.isHit = true;
@@ -92,6 +94,10 @@ public class Fighter implements Actor {
 
     public float getY() {
         return y;
+    }
+
+    public void setX(float x) {
+        this.x = x;
     }
 }
 
