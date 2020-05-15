@@ -158,7 +158,7 @@ public class Game extends BasicGame {
 
     public static void main(String[] argv) {
         try {
-            AppGameContainer container = new AppGameContainer(new Game("Mein Spiel - wie immer es heissen wird..."));
+            AppGameContainer container = new AppGameContainer(new Game("Mein Spiel - Star Wars"));
             container.setDisplayMode(800, 600, false);
             container.start();
         } catch (SlickException e) {
