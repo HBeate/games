@@ -1,14 +1,10 @@
-package at.bha.games.mygame;
+package at.bha.games.star_wars_game;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.openal.Audio;
-import org.newdawn.slick.openal.AudioLoader;
-import org.newdawn.slick.util.ResourceLoader;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 

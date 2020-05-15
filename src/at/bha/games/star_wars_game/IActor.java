@@ -1,4 +1,4 @@
-package at.bha.games.mygame;
+package at.bha.games.star_wars_game;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
