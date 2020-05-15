@@ -19,7 +19,6 @@ public class Falcon implements IActor {
     private Font font2;
     Random random = new Random();
 
-
     public Falcon() throws SlickException {
         Image tmp = new Image("myfiles/falcon.png");
         this.falcon = tmp.getScaledCopy(100, 120);
@@ -35,8 +34,6 @@ public class Falcon implements IActor {
     public void render(Graphics graphics) {
         if (!isHit) {
             falcon.draw(this.x, this.y);
-//        graphics.setColor(new Color(50, 250, 50));
-//        graphics.draw(this.collisionShape);
         } else {
             falcon.draw();
         }
@@ -104,7 +101,6 @@ public class Falcon implements IActor {
         return y - 10;
     }
 
-
     public void addCollisionPartner(Fighter fighter) {
         this.fighters.add(fighter);
     }
@@ -116,10 +112,6 @@ public class Falcon implements IActor {
     public void setCounterLives(int counterLives) {
         this.counterLives = counterLives;
     }
-//
-//    public void setHit(boolean hit) {
-//        isHit = hit;
-//    }
 
     public void setX(float x) {
         this.x = x;
