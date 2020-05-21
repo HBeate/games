@@ -40,7 +40,7 @@ public class Fighter implements IActor {
         if (!this.isHit) {
             fighter.draw(this.x, this.y);
         }
-        //TODO try to show an image of an explosion, whenever a fighter is hit
+
         for (Bullet bullet : bullets) {
             if (!this.isHit && this.collisionShape.intersects(bullet.getCollisionShape())) {
                 hasExplosion = true;
