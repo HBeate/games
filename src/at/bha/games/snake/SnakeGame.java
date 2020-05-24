@@ -1,18 +1,24 @@
 package at.bha.games.snake;
 
+import at.bha.games.star_wars_game.Fighter;
 import org.newdawn.slick.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class SnakeGame extends BasicGame {
     public static final int GRID_SIZE = 40;
     public static final int SPEED = 500;
     private int timeElapsed = 0;
     private List<Actor> actors;
+    private Element element;
     private Element head;
     private Element tail;
     private String direction;
+    private Actor actor;
+    Random random = new Random();
+    private Food food;
 
     public SnakeGame(String title) {
         super(title);
@@ -21,6 +27,11 @@ public class SnakeGame extends BasicGame {
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
         this.actors = new ArrayList<>();
+        generateApple();
+// TODO addCollisionpartner - need to fix this
+
+//        this.food.addCollisionPartner(element);
+
         Element e1 = new Element(1, 5);
         Element e2 = new Element(2, 5);
         Element e3 = new Element(3, 5);
@@ -45,18 +56,15 @@ public class SnakeGame extends BasicGame {
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
         for (Actor actor : this.actors) {
-            actor.update(gameContainer, delta);
+            actor.update(delta);
         }
         this.timeElapsed += delta;
         if (this.timeElapsed > SPEED) {
-            System.out.println("move");
-
 
             Element tmp = this.tail;
             this.tail = tmp.getNext();
             tmp.setNext(null);
             head.setNext(tmp);
-
 
             int newX = this.head.getX();
             int newY = this.head.getY();
@@ -96,31 +104,38 @@ public class SnakeGame extends BasicGame {
         }
     }
 
-
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         for (Actor actor : this.actors) {
-            actor.render(gameContainer, graphics);
+            actor.render(graphics);
         }
     }
 
     @Override
     public void keyPressed(int key, char c) {
-        if ((key == Input.KEY_RIGHT) && (direction != "left")) {
+        if ((key == Input.KEY_RIGHT) && (!direction.equals("left"))) {
             direction = "right";
         }
-        if (key == Input.KEY_LEFT && (direction != "right")) {
+        if (key == Input.KEY_LEFT && (!direction.equals("right"))) {
             direction = "left";
         }
-        if (key == Input.KEY_UP&& (direction != "down")) {
+        if (key == Input.KEY_UP&& (!direction.equals("down"))) {
             direction = "up";
         }
-        if (key==Input.KEY_DOWN&& (direction != "up")) {
+        if (key==Input.KEY_DOWN&& (!direction.equals("up"))) {
             direction = "down";
         }
 
     }
+    private void generateApple() throws SlickException {
 
+        for (int i = 0; i < 1; i++) {
+            Food food= new Food();
+            this.actors.add(food);
+//            this.food.add(food);
+//                      this.falcon.addCollisionPartner(fighter);
+        }
+    }
     public static void main(String[] argv) {
         try {
             AppGameContainer container = new AppGameContainer(new SnakeGame("Snake Game"));
