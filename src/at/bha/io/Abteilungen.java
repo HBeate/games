@@ -72,10 +72,7 @@ public class Abteilungen {
                         vertriebEuropa.addPerson(pVertriebEuropa);
                         people.add(pVertriebEuropa);
                         break;
-
                 }
-//                System.out.println(vorstand + " " + lineArray[0]);
-//                System.out.println(einkauf + " " + lineArray[0]);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -94,9 +91,7 @@ public class Abteilungen {
 
 
             }                System.out.println();
-
         }
-
     }
 }
 
