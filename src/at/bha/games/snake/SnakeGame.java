@@ -30,8 +30,6 @@ public class SnakeGame extends BasicGame {
     public void init(GameContainer gameContainer) throws SlickException {
         this.actors = new ArrayList<>();
         generateApple();
-// TODO addCollisionpartner - need to fix this
-
 
         Element e1 = new Element(1, 5);
         Element e2 = new Element(2, 5);
@@ -65,7 +63,12 @@ public class SnakeGame extends BasicGame {
             // new Element
             // this.tip = new Element
             // else
+//            if (direction == DIRECTION.RIGHT && (this.head.getX()+1 == (this.food.getX()))){
+//                System.out.println("Treffer going right");
+//            }else {
             moveForward();
+
+//            }
             this.timeElapsed = 0;
         }
     }
@@ -133,15 +136,14 @@ public class SnakeGame extends BasicGame {
         if (key==Input.KEY_DOWN&& (direction!=DIRECTION.UP)) {
             direction = DIRECTION.DOWN;
         }
-
     }
+
     private void generateApple() throws SlickException {
 
         for (int i = 0; i < 1; i++) {
             Food food= new Food();
             this.actors.add(food);
-//            this.food.add(food);
-//                      this.falcon.addCollisionPartner(fighter);
+
         }
     }
     public static void main(String[] argv) {

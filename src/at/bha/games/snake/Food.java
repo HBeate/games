@@ -39,6 +39,14 @@ public class Food implements Actor {
         this.y = y;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     @Override
     public void render(Graphics graphics) {
         graphics.setColor(Color.red);
