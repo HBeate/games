@@ -20,7 +20,11 @@ public class Abteilungen {
 
         departments.add(vorstand);
         departments.add(einkauf);
-        //etc.
+        departments.add(einkaufEuropa);
+        departments.add(einkaufItalien);
+        departments.add(einkaufUsa);
+        departments.add(vertrieb);
+        departments.add(vertriebEuropa);
 
         File file = new File("./testdata/abteilungen.txt");
         try {
@@ -45,27 +49,27 @@ public class Abteilungen {
                         break;
                     case "Einkauf Europa":
                         Person pEinkaufEuropa = new Person(lineArray[0],einkaufEuropa);
-             //           vorstand.addPerson();
+                      einkaufEuropa.addPerson(pEinkaufEuropa);
                         people.add(pEinkaufEuropa);
                         break;
                     case "Einkauf Italien":
                         Person pEinkaufItalien = new Person(lineArray[0],einkaufItalien);
-             //           vorstand.addPerson();
+                        einkaufItalien.addPerson(pEinkaufItalien);
                         people.add(pEinkaufItalien);
                         break;
                     case "Einkauf USA":
                         Person pEinkaufUsa = new Person(lineArray[0],einkaufUsa);
-            //            vorstand.addPerson();
+                        einkaufUsa.addPerson(pEinkaufUsa);
                         people.add(pEinkaufUsa);
                         break;
                     case "Vertrieb":
                         Person pVertrieb = new Person(lineArray[0],vertrieb);
-           //             vorstand.addPerson();
+                        vertrieb.addPerson(pVertrieb);
                         people.add(pVertrieb);
                         break;
                     case "Vertrieb Europa":
                         Person pVertriebEuropa = new Person(lineArray[0],vertriebEuropa);
-           //             vorstand.addPerson();
+                        vertriebEuropa.addPerson(pVertriebEuropa);
                         people.add(pVertriebEuropa);
                         break;
 
@@ -78,19 +82,18 @@ public class Abteilungen {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
         for (Person person: people) {
             System.out.println(person.getFullName() + " " + person.getDepartment().getName());
         }
+        System.out.println();
 
         for (Department department: departments) {
-            System.out.println(department.getName());
+            System.out.println(department.getName().toUpperCase());
             for (Person person: department.getPeople()){
-                System.out.println(" " + person.getFullName());
+                System.out.println("    " + person.getFullName());
 
-            }
+
+            }                System.out.println();
 
         }
 

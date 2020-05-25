@@ -61,48 +61,55 @@ public class SnakeGame extends BasicGame {
         }
         this.timeElapsed += delta;
         if (this.timeElapsed > SPEED) {
-
-            Element tmp = this.tail;
-            this.tail = tmp.getNext();
-            tmp.setNext(null);
-            head.setNext(tmp);
-
-            int newX = this.head.getX();
-            int newY = this.head.getY();
-
-            // logic for directions
-            switch (direction) {
-                case RIGHT:
-                    newX++;
-                    if (newX > 19) {
-                        newX = 1;
-                    }
-                    break;
-                case LEFT:
-                    newX--;
-                    if (newX < 0) {
-                        newX = 19;
-                    }
-                    break;
-                case UP:
-                    newY--;
-                    if (newY < 0) {
-                        newY = 14;
-                    }
-                    break;
-                case DOWN:
-                    newY++;
-                    if (newY > 14) {
-                        newY = 1;
-                    }
-                    break;
-            }
-            tmp.setX(newX);
-            tmp.setY(newY);
-
-            this.head = tmp;
+            // if DIRECTION and head.x+1 (falls Directrion.RIGHT) ==food.x && y==y and also
+            // new Element
+            // this.tip = new Element
+            // else
+            moveForward();
             this.timeElapsed = 0;
         }
+    }
+
+    private void moveForward() {
+        Element tmp = this.tail;
+        this.tail = tmp.getNext();
+        tmp.setNext(null);
+        head.setNext(tmp);
+
+        int newX = this.head.getX();
+        int newY = this.head.getY();
+
+        // logic for directions
+        switch (direction) {
+            case RIGHT:
+                newX++;
+                if (newX > 19) {
+                    newX = 1;
+                }
+                break;
+            case LEFT:
+                newX--;
+                if (newX < 0) {
+                    newX = 19;
+                }
+                break;
+            case UP:
+                newY--;
+                if (newY < 0) {
+                    newY = 14;
+                }
+                break;
+            case DOWN:
+                newY++;
+                if (newY > 14) {
+                    newY = 1;
+                }
+                break;
+        }
+        tmp.setX(newX);
+        tmp.setY(newY);
+
+        this.head = tmp;
     }
 
     @Override
