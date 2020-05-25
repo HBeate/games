@@ -1,0 +1,6 @@
+Lara;Hauser;Rankweil
+Marvin;Hauser;Rankweil
+Alina;Hauser;Feldkirch
+Lukas;Hauser;Nofels
+Alex;Hauser;Lustenau
+Beate;Hauser;Feldkirch

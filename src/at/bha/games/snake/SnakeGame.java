@@ -1,5 +1,6 @@
 package at.bha.games.snake;
 
+
 import at.bha.games.star_wars_game.Fighter;
 import org.newdawn.slick.*;
 
@@ -10,12 +11,13 @@ import java.util.Random;
 public class SnakeGame extends BasicGame {
     public static final int GRID_SIZE = 40;
     public static final int SPEED = 500;
+    public enum DIRECTION {LEFT, RIGHT, UP, DOWN};
     private int timeElapsed = 0;
     private List<Actor> actors;
     private Element element;
     private Element head;
     private Element tail;
-    private String direction;
+    private DIRECTION direction;
     private Actor actor;
     Random random = new Random();
     private Food food;
@@ -30,14 +32,13 @@ public class SnakeGame extends BasicGame {
         generateApple();
 // TODO addCollisionpartner - need to fix this
 
-//        this.food.addCollisionPartner(element);
 
         Element e1 = new Element(1, 5);
         Element e2 = new Element(2, 5);
         Element e3 = new Element(3, 5);
         Element e4 = new Element(4, 5);
 
-        this.direction = "right";
+        this.direction = DIRECTION.RIGHT;
 
         //Elemente verbinden
         e1.setNext(e2);
@@ -71,25 +72,25 @@ public class SnakeGame extends BasicGame {
 
             // logic for directions
             switch (direction) {
-                case "right":
+                case RIGHT:
                     newX++;
                     if (newX > 19) {
                         newX = 1;
                     }
                     break;
-                case "left":
+                case LEFT:
                     newX--;
                     if (newX < 0) {
                         newX = 19;
                     }
                     break;
-                case "up":
+                case UP:
                     newY--;
                     if (newY < 0) {
                         newY = 14;
                     }
                     break;
-                case "down":
+                case DOWN:
                     newY++;
                     if (newY > 14) {
                         newY = 1;
@@ -113,17 +114,17 @@ public class SnakeGame extends BasicGame {
 
     @Override
     public void keyPressed(int key, char c) {
-        if ((key == Input.KEY_RIGHT) && (!direction.equals("left"))) {
-            direction = "right";
+        if ((key == Input.KEY_RIGHT) && (direction!=DIRECTION.LEFT)) {
+            direction = DIRECTION.RIGHT;
         }
-        if (key == Input.KEY_LEFT && (!direction.equals("right"))) {
-            direction = "left";
+        if (key == Input.KEY_LEFT && (direction!=DIRECTION.RIGHT)) {
+            direction = DIRECTION.LEFT;
         }
-        if (key == Input.KEY_UP&& (!direction.equals("down"))) {
-            direction = "up";
+        if (key == Input.KEY_UP&& (direction!=DIRECTION.DOWN)) {
+            direction = DIRECTION.UP;
         }
-        if (key==Input.KEY_DOWN&& (!direction.equals("up"))) {
-            direction = "down";
+        if (key==Input.KEY_DOWN&& (direction!=DIRECTION.UP)) {
+            direction = DIRECTION.DOWN;
         }
 
     }

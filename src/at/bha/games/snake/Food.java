@@ -6,6 +6,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Food implements Actor {
@@ -15,6 +16,7 @@ public class Food implements Actor {
     Random random = new Random();
     private Shape collisionShape;
     private Element element;
+    private ArrayList<Element> elements;
     private Food food;
 
     public Food() {
@@ -53,6 +55,6 @@ public class Food implements Actor {
         this.collisionShape.setCenterY(this.y* SnakeGame.GRID_SIZE+10);
     }
     public void addCollisionPartner(Element element){
-        this.element.addCollisionPartner(food);
+        this.elements.add(element);
     }
 }
