@@ -14,13 +14,13 @@ public class SnakeGame extends BasicGame {
     public enum DIRECTION {LEFT, RIGHT, UP, DOWN};
     private int timeElapsed = 0;
     private List<Actor> actors;
-    private Element element;
+//    private Element element;
     private Element head;
     private Element tail;
     private DIRECTION direction;
     private Actor actor;
     Random random = new Random();
-    private Food food;
+ //   private Food food;
 
     public SnakeGame(String title) {
         super(title);
@@ -50,6 +50,7 @@ public class SnakeGame extends BasicGame {
         this.actors.add(e2);
         this.actors.add(e3);
         this.actors.add(e4);
+
     }
 
     @Override
@@ -59,7 +60,8 @@ public class SnakeGame extends BasicGame {
         }
         this.timeElapsed += delta;
         if (this.timeElapsed > SPEED) {
-            // if DIRECTION and head.x+1 (falls Directrion.RIGHT) ==food.x && y==y and also
+
+            // if head.x+1 (falls Direction.RIGHT) ==food.x && y==y and also
             // new Element
             // this.tip = new Element
             // else
@@ -67,7 +69,8 @@ public class SnakeGame extends BasicGame {
 //                System.out.println("Treffer going right");
 //            }else {
             moveForward();
-
+            System.out.println("HEAD x "+this.head.getX());
+       //     System.out.println("Food x " + food.x);
 //            }
             this.timeElapsed = 0;
         }
@@ -143,7 +146,8 @@ public class SnakeGame extends BasicGame {
         for (int i = 0; i < 1; i++) {
             Food food= new Food();
             this.actors.add(food);
-
+            System.out.println("Food x:"+ food.getX());
+            System.out.println("Food y:"+ food.getY());
         }
     }
     public static void main(String[] argv) {
