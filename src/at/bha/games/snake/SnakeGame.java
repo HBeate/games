@@ -1,7 +1,5 @@
 package at.bha.games.snake;
 
-
-import at.bha.games.star_wars_game.Fighter;
 import org.newdawn.slick.*;
 
 import java.util.ArrayList;
