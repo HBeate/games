@@ -11,16 +11,18 @@ import java.util.Random;
 public class SnakeGame extends BasicGame {
     public static final int GRID_SIZE = 40;
     public static final int SPEED = 500;
-    public enum DIRECTION {LEFT, RIGHT, UP, DOWN};
+
+    public enum DIRECTION {LEFT, RIGHT, UP, DOWN}
+
     private int timeElapsed = 0;
     private List<Actor> actors;
-//    private Element element;
+    //    private Element element;
     private Element head;
     private Element tail;
     private DIRECTION direction;
     private Actor actor;
     Random random = new Random();
- //   private Food food;
+    private Food food;
 
     public SnakeGame(String title) {
         super(title);
@@ -29,6 +31,7 @@ public class SnakeGame extends BasicGame {
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
         this.actors = new ArrayList<>();
+
         generateApple();
 
         Element e1 = new Element(1, 5);
@@ -37,7 +40,6 @@ public class SnakeGame extends BasicGame {
         Element e4 = new Element(4, 5);
 
         this.direction = DIRECTION.RIGHT;
-
         //Elemente verbinden
         e1.setNext(e2);
         e2.setNext(e3);
@@ -61,17 +63,17 @@ public class SnakeGame extends BasicGame {
         this.timeElapsed += delta;
         if (this.timeElapsed > SPEED) {
 
+//            int[] coordinatesFood = new int [2];
             // if head.x+1 (falls Direction.RIGHT) ==food.x && y==y and also
             // new Element
             // this.tip = new Element
             // else
-//            if (direction == DIRECTION.RIGHT && (this.head.getX()+1 == (this.food.getX()))){
-//                System.out.println("Treffer going right");
+            if (direction == DIRECTION.RIGHT && (this.head.getX() + 1 == (food.getX()))) {
+                System.out.println("Treffer going right");
 //            }else {
+
+            }
             moveForward();
-            System.out.println("HEAD x "+this.head.getX());
-       //     System.out.println("Food x " + food.x);
-//            }
             this.timeElapsed = 0;
         }
     }
@@ -90,7 +92,7 @@ public class SnakeGame extends BasicGame {
             case RIGHT:
                 newX++;
                 if (newX > 19) {
-                    newX = 1;
+                    newX = 0;
                 }
                 break;
             case LEFT:
@@ -108,7 +110,7 @@ public class SnakeGame extends BasicGame {
             case DOWN:
                 newY++;
                 if (newY > 14) {
-                    newY = 1;
+                    newY = 0;
                 }
                 break;
         }
@@ -127,16 +129,16 @@ public class SnakeGame extends BasicGame {
 
     @Override
     public void keyPressed(int key, char c) {
-        if ((key == Input.KEY_RIGHT) && (direction!=DIRECTION.LEFT)) {
+        if ((key == Input.KEY_RIGHT) && (direction != DIRECTION.LEFT)) {
             direction = DIRECTION.RIGHT;
         }
-        if (key == Input.KEY_LEFT && (direction!=DIRECTION.RIGHT)) {
+        if (key == Input.KEY_LEFT && (direction != DIRECTION.RIGHT)) {
             direction = DIRECTION.LEFT;
         }
-        if (key == Input.KEY_UP&& (direction!=DIRECTION.DOWN)) {
+        if (key == Input.KEY_UP && (direction != DIRECTION.DOWN)) {
             direction = DIRECTION.UP;
         }
-        if (key==Input.KEY_DOWN&& (direction!=DIRECTION.UP)) {
+        if (key == Input.KEY_DOWN && (direction != DIRECTION.UP)) {
             direction = DIRECTION.DOWN;
         }
     }
@@ -144,12 +146,14 @@ public class SnakeGame extends BasicGame {
     private void generateApple() throws SlickException {
 
         for (int i = 0; i < 1; i++) {
-            Food food= new Food();
+            Food food = new Food();
             this.actors.add(food);
-            System.out.println("Food x:"+ food.getX());
-            System.out.println("Food y:"+ food.getY());
+
+//            System.out.println("Food x:" + food.getX());
+//            System.out.println("Food y:" + food.getY());
         }
     }
+
     public static void main(String[] argv) {
         try {
             AppGameContainer container = new AppGameContainer(new SnakeGame("Snake Game"));
