@@ -16,9 +16,6 @@ public class Element implements Actor {
 //    private ArrayList<Food> foods;
 
     public Element(int x, int y) {
-        /*
-        test
-         */
         this.x = x;
         this.y = y;
 //        this.foods = new ArrayList<Food>();
