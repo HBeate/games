@@ -18,6 +18,7 @@ public class Element implements Actor {
     public Element(int x, int y) {
         this.x = x;
         this.y = y;
+        // ich bin ein kommentar
 //        this.foods = new ArrayList<Food>();
     }
 
