@@ -35,44 +35,8 @@ public class Abteilungen {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] lineArray = line.split(";");
 
-                switch (lineArray[1]) {
-                    case "Vorstand":
-                        Person pVorstand = new Person(lineArray[0],vorstand);
-                        vorstand.addPerson(pVorstand);
+                addPersonToDep(people, departments, lineArray);
 
-                        people.add(pVorstand);
-                        break;
-                    case "Einkauf":
-                        Person pEinkauf = new Person(lineArray[0],einkauf);
-                        einkauf.addPerson(pEinkauf);
-                        people.add(pEinkauf);
-                        break;
-                    case "Einkauf Europa":
-                        Person pEinkaufEuropa = new Person(lineArray[0],einkaufEuropa);
-                      einkaufEuropa.addPerson(pEinkaufEuropa);
-                        people.add(pEinkaufEuropa);
-                        break;
-                    case "Einkauf Italien":
-                        Person pEinkaufItalien = new Person(lineArray[0],einkaufItalien);
-                        einkaufItalien.addPerson(pEinkaufItalien);
-                        people.add(pEinkaufItalien);
-                        break;
-                    case "Einkauf USA":
-                        Person pEinkaufUsa = new Person(lineArray[0],einkaufUsa);
-                        einkaufUsa.addPerson(pEinkaufUsa);
-                        people.add(pEinkaufUsa);
-                        break;
-                    case "Vertrieb":
-                        Person pVertrieb = new Person(lineArray[0],vertrieb);
-                        vertrieb.addPerson(pVertrieb);
-                        people.add(pVertrieb);
-                        break;
-                    case "Vertrieb Europa":
-                        Person pVertriebEuropa = new Person(lineArray[0],vertriebEuropa);
-                        vertriebEuropa.addPerson(pVertriebEuropa);
-                        people.add(pVertriebEuropa);
-                        break;
-                }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -91,6 +55,17 @@ public class Abteilungen {
 
 
             }                System.out.println();
+        }
+    }
+
+    private static void addPersonToDep(List<Person> people, List<Department> departments, String[] lineArray) {
+        for (Department dep : departments) {
+            if(dep.getName().equalsIgnoreCase(lineArray[1])){
+                Person person = new Person(lineArray[0],dep);
+                dep.addPerson(person);
+
+                people.add(person);
+            }
         }
     }
 }
