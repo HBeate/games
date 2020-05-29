@@ -14,21 +14,19 @@ public class Food implements Actor {
     private boolean isEaten;
     private int counter = 0;
     Random random = new Random();
-    private Shape collisionShape;
     private Element element;
     private ArrayList<Element> elements;
     private Food food;
 
     public Food() {
-        this.x = random.nextInt(14);
+        this.x = random.nextInt(20);
         this.y = random.nextInt(15);
         this.isEaten = false;
-        this.collisionShape  = new Circle(this.x,this.y,10);
-
     }
 
-    public boolean isEaten() {
-        return isEaten;
+
+    public void setEaten(boolean eaten) {
+        isEaten = eaten;
     }
 
     public void setX(int x) {
@@ -39,22 +37,26 @@ public class Food implements Actor {
         this.y = y;
     }
 
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
     @Override
     public void render(Graphics graphics) {
-        graphics.setColor(Color.red);
-        graphics.fillOval(this.x * SnakeGame.GRID_SIZE, this.y * SnakeGame.GRID_SIZE, 20, 20);
-        graphics.setColor(Color.white);
-        graphics.draw(this.collisionShape);
-
+      if (!isEaten) {
+          graphics.setColor(Color.red);
+          graphics.fillOval(this.x * SnakeGame.GRID_SIZE, this.y * SnakeGame.GRID_SIZE, 20, 20);
+      }
     }
+
 
     @Override
     public void update(int delta) {
 
-        this.collisionShape.setCenterX(this.x* SnakeGame.GRID_SIZE+10);
-        this.collisionShape.setCenterY(this.y* SnakeGame.GRID_SIZE+10);
-    }
-    public void addCollisionPartner(Element element){
-        this.elements.add(element);
+
     }
 }
