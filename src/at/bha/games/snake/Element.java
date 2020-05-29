@@ -17,6 +17,9 @@ public class Element implements Actor {
     private ArrayList<Food> foods;
 
     public Element(int x, int y) {
+        /*
+        test
+         */
         this.x = x;
         this.y = y;
         this.collisionShape = new Rectangle(this.x, this.y, 20,20);
