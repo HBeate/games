@@ -13,12 +13,12 @@ public class Element implements Actor {
 
     private int x,y;
     private Element next;
-    private ArrayList<Food> foods;
+//    private ArrayList<Food> foods;
 
     public Element(int x, int y) {
         this.x = x;
         this.y = y;
-        this.foods = new ArrayList<Food>();
+//        this.foods = new ArrayList<Food>();
     }
 
     public int getX() {

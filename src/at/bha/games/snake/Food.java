@@ -24,8 +24,9 @@ public class Food implements Actor {
         this.isEaten = false;
     }
 
-    public boolean isEaten() {
-        return isEaten;
+
+    public void setEaten(boolean eaten) {
+        isEaten = eaten;
     }
 
     public void setX(int x) {
@@ -46,10 +47,12 @@ public class Food implements Actor {
 
     @Override
     public void render(Graphics graphics) {
-        graphics.setColor(Color.red);
-        graphics.fillOval(this.x * SnakeGame.GRID_SIZE, this.y * SnakeGame.GRID_SIZE, 20, 20);
-
+      if (!isEaten) {
+          graphics.setColor(Color.red);
+          graphics.fillOval(this.x * SnakeGame.GRID_SIZE, this.y * SnakeGame.GRID_SIZE, 20, 20);
+      }
     }
+
 
     @Override
     public void update(int delta) {

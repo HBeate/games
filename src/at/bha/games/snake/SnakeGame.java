@@ -1,26 +1,25 @@
 package at.bha.games.snake;
 
 import org.newdawn.slick.*;
+import org.newdawn.slick.AngelCodeFont;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class SnakeGame extends BasicGame {
+    public enum DIRECTION {LEFT, RIGHT, UP, DOWN}
+
     public static final int GRID_SIZE = 40;
     public static final int SPEED = 500;
 
-    public enum DIRECTION {LEFT, RIGHT, UP, DOWN}
-
     private int timeElapsed = 0;
     private List<Actor> actors;
-    //    private Element element;
     private Element head;
     private Element tail;
     private DIRECTION direction;
-    private Actor actor;
-    Random random = new Random();
     private Food food;
+    private int counter = 0;
+    //   private List<Food> foods; Falls ich mal mehrere Foods anzeigen möchte
 
     public SnakeGame(String title) {
         super(title);
@@ -50,7 +49,6 @@ public class SnakeGame extends BasicGame {
         this.actors.add(e2);
         this.actors.add(e3);
         this.actors.add(e4);
-
     }
 
     @Override
@@ -61,19 +59,57 @@ public class SnakeGame extends BasicGame {
         this.timeElapsed += delta;
         if (this.timeElapsed > SPEED) {
 
-//            int[] coordinatesFood = new int [2];
-            // if head.x+1 (falls Direction.RIGHT) ==food.x && y==y and also
-            // new Element
-            // this.tip = new Element
-            // else
-            if (direction == DIRECTION.RIGHT && (this.head.getX() + 1 == (food.getX()))) {
-                System.out.println("Treffer going right");
-//            }else {
+// new Element
+// this.head = new Element
+// else
 
+            if (direction == DIRECTION.RIGHT && (this.head.getX() + 1 == (food.getX()))
+                    && (this.head.getY() == food.getY())) {
+                strike();
+            }
+            if (direction == DIRECTION.LEFT && (this.head.getX() - 1 == (food.getX()))
+                    && (this.head.getY() == food.getY())) {
+                strike();
+            }
+            if (direction == DIRECTION.DOWN && (this.head.getX() == (food.getX()))
+                    && (this.head.getY() + 1 == food.getY())) {
+                strike();
+            }
+            if (direction == DIRECTION.UP && (this.head.getX() == (food.getX()))
+                    && (this.head.getY() - 1 == food.getY())) {
+                strike();
             }
             moveForward();
             this.timeElapsed = 0;
         }
+    }
+
+    private void strike() throws SlickException {
+        System.out.println("Strike going " + direction);
+        this.counter++;
+        System.out.println(counter);
+        this.food.setEaten(true);
+        generateApple();
+
+        int x = this.head.getX();
+        int y = this.head.getY();
+        switch (direction) {
+            case RIGHT:
+                x++;
+                break;
+            case LEFT:
+                x--;
+                break;
+            case DOWN:
+                y++;
+                break;
+            case UP:
+                y--;
+                break;
+        }
+        Element element = new Element(x, y);
+        this.actors.add(element);
+        this.head = element;
     }
 
     private void moveForward() {
@@ -144,11 +180,11 @@ public class SnakeGame extends BasicGame {
     private void generateApple() throws SlickException {
 
         for (int i = 0; i < 1; i++) {
-            Food food = new Food();
+            this.food = new Food();
             this.actors.add(food);
-
-//            System.out.println("Food x:" + food.getX());
-//            System.out.println("Food y:" + food.getY());
+            this.food.setEaten(false);
+            System.out.println("Food x:" + food.getX());
+            System.out.println("Food y:" + food.getY());
         }
     }
 
@@ -161,6 +197,4 @@ public class SnakeGame extends BasicGame {
             e.printStackTrace();
         }
     }
-
-
 }
