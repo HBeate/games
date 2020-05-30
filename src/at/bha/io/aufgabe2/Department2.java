@@ -1,5 +1,7 @@
 package at.bha.io.aufgabe2;
 
+import at.bha.io.Department;
+
 import java.util.ArrayList;
 
 public class Department2 {
@@ -25,12 +27,6 @@ public class Department2 {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "Department{" +
-                "name='" + name + '\'' +
-                '}';
-    }
     public void addPerson(Person2 person2){
         this.people.add(person2);
     }
@@ -40,6 +36,15 @@ public class Department2 {
         return people;
     }
 
+    public ArrayList<Department2> getChildDepartments(){
+        return department2s;
+    }
 
+    @Override
+    public String toString() {
+        return "Department{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }
 

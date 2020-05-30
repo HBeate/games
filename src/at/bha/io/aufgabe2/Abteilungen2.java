@@ -9,9 +9,6 @@ import java.util.List;
 
 public class Abteilungen2 {
     public static void main(String[] args) {
-
-        List<Person2> people = new ArrayList<>();
-        List<Department2> department2s = new ArrayList<>();
         List<Department2> parents = new ArrayList<>();
 
         File file = new File("./testdata/abteilungen1.txt");
@@ -25,25 +22,35 @@ public class Abteilungen2 {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] lineArray = line.split(";");
                 if (lineArray.length == 3) {
-                    Department2 parent = new Department2(lineArray[2]);
-                    parents.add(parent);
+                    Department2 parent = null;
+                    for (Department2 parentDep : parents) {
+                        if(parentDep.getName().equalsIgnoreCase(lineArray[2])){
+                            parent = parentDep;
+                        }
+                    }
+                    if(parent == null) {
+                        parent = new Department2(lineArray[2].trim());
+                        parents.add(parent);
+                    }
                 }
             }
             fileReader = new FileReader(file);
             bufferedReader = new BufferedReader(fileReader);
             while ((line = bufferedReader.readLine()) != null) { //Max Mustermann;Einkauf;VOrstand
-                String[] lineArray = line.split(";"); // Max Mustermann     0
+                String[] lineArray = line.split(";");                 // Max Mustermann       0
                 // Einkauf              1
                 // Vorstand             2
-                Department2 dep = new Department2(lineArray[1]); // Einkauf
-                Person2 pers = new Person2(lineArray[0], dep);   // Mustermann
+
+                Department2 dep = new Department2(lineArray[1].trim()); // Einkauf
+                Person2 pers = new Person2(lineArray[0].trim(), dep);   // Mustermann
 
                 dep.addPerson(pers);
 
                 if (lineArray.length == 3) {
                     for (Department2 department2 : parents) { // Vorstand
-                        if (department2.getName().equals(lineArray[2])) { // Objekt Vorstand equals String Vorstand
+                        if (department2.getName().equals(lineArray[2].trim())) { // Objekt Vorstand equals String Vorstand
                             department2.addChildDepartment(dep);
+                            department2.addPerson(pers);
                             break;
                         }
                     }
@@ -54,19 +61,18 @@ public class Abteilungen2 {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (Department2 department2 : parents) {
-            System.out.println("'"+department2.getName().toUpperCase()+"'");
 
-
-
-                for (Person2 person : department2.getPeople()) {
+        for (Department2 parent : parents) {
+            System.out.println("'" + parent.getName().toUpperCase() + "'");
+            for (Department2 child : parent.getChildDepartments()) {
+                System.out.println(child.getName());
+                for (Person2 person : child.getPeople()) {
                     System.out.println("    '" + person.getFullName() + "'");
                 }
-
-            System.out.println();
+                System.out.println();
+//            }
+            }
         }
-//        System.out.println(parents);
     }
 }
-
 
