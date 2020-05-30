@@ -21,10 +21,9 @@ public class Person {
         return fullName;
     }
 
-    public Department getDepartment() {
-        return department;
-    }
-
+//    public Department getDepartment() {
+//        return department;
+//    }
 
     @Override
     public String toString() {

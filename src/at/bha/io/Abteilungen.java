@@ -32,39 +32,32 @@ public class Abteilungen {
 
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line = null;
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] lineArray = line.split(";");
+            while ((line = bufferedReader.readLine())!= null) {
+                String[] lineArray = line.trim().split(";");
 
-                addPersonToDep(people, departments, lineArray);
-
+                addPersonToDep(departments, lineArray);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (Person person: people) {
-            System.out.println(person.getFullName() + " " + person.getDepartment().getName());
-        }
-        System.out.println();
 
-        for (Department department: departments) {
-            System.out.println(department.getName().toUpperCase());
+        for (Department department : departments) {
+            System.out.println("'"+department.getName().toUpperCase()+"'");
             for (Person person: department.getPeople()){
-                System.out.println("    " + person.getFullName());
-
-
-            }                System.out.println();
+                System.out.println("    '" + person.getFullName() + "'");
+            }
+            System.out.println();
         }
     }
 
-    private static void addPersonToDep(List<Person> people, List<Department> departments, String[] lineArray) {
+    private static void addPersonToDep(List<Department> departments, String[] lineArray) {
         for (Department dep : departments) {
             if(dep.getName().equalsIgnoreCase(lineArray[1])){
                 Person person = new Person(lineArray[0],dep);
                 dep.addPerson(person);
 
-                people.add(person);
             }
         }
     }

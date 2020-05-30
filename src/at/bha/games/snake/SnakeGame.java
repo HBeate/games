@@ -109,7 +109,9 @@ public class SnakeGame extends BasicGame {
         }
         Element element = new Element(x, y);
         this.actors.add(element);
+        Element tmp = this.head;
         this.head = element;
+        tmp.setNext(this.head);
     }
 
     private void moveForward() {
