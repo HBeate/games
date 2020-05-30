@@ -3,30 +3,22 @@ package at.bha.io.aufgabe2;
 import java.util.ArrayList;
 
 public class Department2 {
-
     private String name;
-    private String parentDepartmentName;
     private ArrayList<Person2> people;
+    private ArrayList<Department2> department2s;
 
-   // private ArrayList<Department2> department2s;
-
-    public Department2(String name, String parentDepartmentName) {
+    public Department2(String name) {
         this.name = name;
-        this.parentDepartmentName = parentDepartmentName;
         this.people = new ArrayList<Person2>();
-   //     this.department2s = new ArrayList<>();
+        this.department2s = new ArrayList<>();
     }
 
     public void addChildDepartment(Department2 child){
- //       department2s.add(child);
+        department2s.add(child);
     }
 
     public String getName() {
         return name;
-    }
-
-    public String getParentDepartmentName() {
-        return parentDepartmentName;
     }
 
     public void setName(String name) {

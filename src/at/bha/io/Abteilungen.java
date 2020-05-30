@@ -30,10 +30,11 @@ public class Abteilungen {
         try {
             FileReader fileReader = new FileReader(file);
 
+
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line = null;
             while ((line = bufferedReader.readLine())!= null) {
-                String[] lineArray = line.trim().split(";");
+                String[] lineArray = line.split(";");
 
                 addPersonToDep(departments, lineArray);
             }
@@ -54,8 +55,8 @@ public class Abteilungen {
 
     private static void addPersonToDep(List<Department> departments, String[] lineArray) {
         for (Department dep : departments) {
-            if(dep.getName().equalsIgnoreCase(lineArray[1])){
-                Person person = new Person(lineArray[0],dep);
+            if(dep.getName().equalsIgnoreCase(lineArray[1].trim())){
+                Person person = new Person(lineArray[0].trim(),dep);
                 dep.addPerson(person);
 
             }
