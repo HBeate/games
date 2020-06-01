@@ -42,9 +42,7 @@ public class Department2 {
 
     @Override
     public String toString() {
-        return "Department{" +
-                "name='" + name + '\'' +
-                '}';
+        return name;
     }
 }
 

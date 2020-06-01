@@ -7,7 +7,7 @@ import java.util.List;
 public class Abteilungen {
     public static void main(String[] args) {
 
-        List<Person> people = new ArrayList<>();
+ //       List<Person> people = new ArrayList<>();
         List<Department> departments = new ArrayList<>();
 
         Department vorstand = new Department("Vorstand");
@@ -49,7 +49,7 @@ public class Abteilungen {
             for (Person person: department.getPeople()){
                 System.out.println("    '" + person.getFullName() + "'");
             }
-            System.out.println();
+  //          System.out.println();
         }
     }
 
